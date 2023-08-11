@@ -1,34 +1,19 @@
-const calculadoraDeProductos = (producto, cuotas) => {
-  return producto / cuotas;
-};
+const btnCart = document.querySelector('.container-cart-icon')
+const containerCartProducts = document.querySelector('.container-cart-products')
 
-// variable booleana que se encarga de ejectuar el programa
-let tienda = true;
+btnCart.addEventListener('click', () => {
+  containerCartProducts.classList.toggle('hidden-cart')
+})
 
-do {
+// =============
+const cartInfo = document.querySelector('.cart-product')
+const rowProduct = document.querySelector('row-product')
 
-  let productoIngresado = prompt("Ingrese el valor de un producto")
-  let cuotas = prompt("Ingrese la cantidad de cuotas");
+// Lista de todos los contenedores de productos
 
-  // condicionales para ejecutar la calculadora
-  if(productoIngresado != "" && cuotas != ""){
+const productsList = document.querySelector('container-items')
 
-    let resultado = calculadoraDeProductos(productoIngresado, cuotas)
+// Variable de arreglos de Productos
 
-    alert("El precio del producto es: " + productoIngresado + "\nCuotas que elegiste: " + cuotas + "\nTotal a pagar por cuota: $" + resultado);
+let allProducts = []
 
-  } else{
-    alert("Vuelva a ingresar los productos y cuotas");
-  }
-
-  let seguirCalculando = prompt("¿Desea seguir calculando productos? Ingrese 'SI' o 'NO' para salir").toUpperCase();
-
-  // condicional para que se repita o no el programa.
-  if(seguirCalculando === "NO"){
-    tienda = false;
-    break;
-  } else {
-    tienda = true;
-  }
-
-} while (tienda);
