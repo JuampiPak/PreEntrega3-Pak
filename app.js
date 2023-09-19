@@ -34,27 +34,37 @@ productsList.addEventListener('click', e => {
 			price: product.querySelector('p').textContent,
 		};
 
-		const exits = allProducts.some(
-			product => product.title === infoProduct.title
-		);
-
-		if (exits) {
-			const products = allProducts.map(product => {
+		if (allProducts.length === 0) {
+			allProducts.push(infoProduct);
+		} else {
+			const exists = allProducts.some(product => {
 				if (product.title === infoProduct.title) {
 					product.quantity++;
-					return product;
-				} else {
-					return product;
+					return true;
 				}
+				return false;
 			});
-			allProducts = [...products];
-		} else {
-			allProducts = [...allProducts, infoProduct];
+
+			if (!exists) {
+				allProducts.push(infoProduct);
+			}
 		}
+
+		localStorage.setItem('carrito', JSON.stringify(allProducts));
 
 		showHTML();
 	}
 });
+
+function loadCartFromLocalStorage() {
+  const storedCart = localStorage.getItem('carrito');
+  if (storedCart) {
+    allProducts = JSON.parse(storedCart);
+    showHTML();
+  }
+}
+
+window.addEventListener('load', loadCartFromLocalStorage);
 
 rowProduct.addEventListener('click', e => {
 	if (e.target.classList.contains('icon-close')) {
@@ -64,6 +74,8 @@ rowProduct.addEventListener('click', e => {
 		allProducts = allProducts.filter(
 			product => product.title !== title
 		);
+
+		localStorage.setItem('carrito', JSON.stringify(allProducts));
 
 		console.log(allProducts);
 
