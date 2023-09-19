@@ -1,7 +1,9 @@
 const btnCart = document.querySelector('.container-cart-icon');
+const btnCompra = document.getElementById('btn-compra')
 const containerCartProducts = document.querySelector(
 	'.container-cart-products'
 );
+
 
 btnCart.addEventListener('click', () => {
 	containerCartProducts.classList.toggle('hidden-cart');
@@ -137,3 +139,10 @@ const showHTML = () => {
 	valorTotal.innerText = `$${total}`;
 	countProducts.innerText = totalOfProducts;
 };
+
+btnCompra.addEventListener('click', () => {
+	alert("Compra Finalizada")
+	localStorage.removeItem ('carrito')
+	allProducts = [];
+	window.location.reload()
+})
